@@ -69,6 +69,7 @@ pub mod machineid {
 #[cfg(test)]
 mod tests {
 
+    // Tests are not agnostic to OS unfortunately.
     use super::*;
     use regex::Regex;
 
