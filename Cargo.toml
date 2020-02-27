@@ -6,7 +6,9 @@ edition = "2018"
 keywords = ["uuid", "machine"]
 readme = "README.md"
 description = "A library to retrieve a machines UUID"
-licence = "MIT"
+licence = "MIT OR Apache-2.0"
+documentation = "https://docs.rs/machine_uuid"
+categories = ["development-tools::procedural-macro-helpers"]
 repository = "https://github.com/choicesourcing/machine_uuid"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
