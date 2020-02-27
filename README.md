@@ -1,4 +1,4 @@
-# MACHINE-UUID
+# Machine-UUID
 ### A library that retrieves UUID for a machine
 
 ## OS Support
