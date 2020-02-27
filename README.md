@@ -1,4 +1,4 @@
-# Machine-UUID
+# Machine UUID
 ### A library that retrieves UUID for a machine
 
 ## OS Support
@@ -21,5 +21,5 @@ assert_eq!("92cc698195f84d3b85f1cfb0a09e957f", uuid);
 ## Add this to your Cargo.toml:
 ```
 [dependencies]
-machine-uuid = "0.1.0"
+machine_uuid = "0.1.0"
 ```

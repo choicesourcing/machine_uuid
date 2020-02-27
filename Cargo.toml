@@ -1,5 +1,5 @@
 [package]
-name = "machine-uuid"
+name = "machine_uuid"
 version = "0.1.0"
 authors = ["danebalia <dane.balia@sourcing-sa.co.za>"]
 edition = "2018"
