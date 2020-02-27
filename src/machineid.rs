@@ -16,7 +16,7 @@ pub mod machineid {
     /// # Examples
     ///
     /// ```
-    /// let uuid = machineid::get();
+    /// let uuid = machine_uuid::get();
     /// 
     /// // Based on OS, UUID format will differ
     /// // Windows
@@ -24,7 +24,7 @@ pub mod machineid {
     /// 
     /// // Based on OS, UUID format will differ
     /// // Linux
-    /// assert_eq!("92cc698195f84d3b85f1cfb0a09e957f", uuid);
+    /// assert_eq!("92cc698195f84d3b85f1cfb0a09e957f\n", uuid);
     /// 
     /// ```
     pub fn get() -> String
@@ -47,7 +47,8 @@ pub mod machineid {
     /// # Examples
     ///
     /// ```
-    /// let untransformed = machineid::get_via_windows_shell();
+    /// #[cfg(any(windows))]
+    /// let untransformed = machine_uuid::get_via_windows_shell();
     /// 
     /// // c:\ wmic csproduct get UUID
     /// // UUID
@@ -79,7 +80,8 @@ pub mod machineid {
     /// # Examples
     ///
     /// ```
-    /// let uuid_untrimmed = machineid::get_via_linux_shell();
+    /// #[cfg(any(unix))]
+    /// let uuid_untrimmed = machine_uuid::get_via_linux_shell();
     /// 
     /// // c:\ cat /etc/machine-id
     /// // 92cc698195f84d3b85f1cfb0a09e957f
@@ -113,8 +115,8 @@ pub mod machineid {
     /// // UUID  *transforms removes*
     /// // 140EF834-2DB3-0F7A-27B4-4CEDFB73167C *transform returns*
     /// 
-    /// let raw = machineid::get_via_windows_shell();
-    /// let just_uuid = machineid::transform_windows_output(raw);
+    /// //let raw = machine_uuid::get_via_windows_shell();
+    /// //let just_uuid = machine_uuid::transform_windows_output(raw);
     ///
     /// ```
     pub fn transform_windows_output(output: String) -> String {
@@ -131,16 +133,17 @@ mod tests {
     use regex::Regex;
 
     #[test]
-    fn it_gets_uuid_for_linux() {
-        let result = machineid::get_via_linux_shell();
-        assert!(result.trim().len() == 32);
-    }
+    fn test_if_gets_uuid() {
 
-    #[test]
-    fn it_gets_uuid_for_windows() {
-        let output = machineid::get_via_windows_shell();
-        let result = transform_windows_output(output); 
-        let re = Regex::new(r"\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b").unwrap();
-        assert!(re.is_match(&result.to_lowercase()));
+        if cfg!(windows) {
+            let output = machineid::get_via_windows_shell();
+            let result = transform_windows_output(output); 
+            let re = Regex::new(r"\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b").unwrap();
+            assert!(re.is_match(&result.to_lowercase()));
+        } else {
+            let result = machineid::get_via_linux_shell();
+            assert!(result.trim().len() == 32);
+        }
     }
+       
 }
