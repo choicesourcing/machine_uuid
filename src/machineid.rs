@@ -84,7 +84,7 @@ pub mod machineid {
     /// #[cfg(any(unix))]
     /// let uuid_untrimmed = machine_uuid::get_via_linux_shell();
     /// 
-    /// // c:\ cat /etc/machine-id
+    /// // # cat /etc/machine-id
     /// // 92cc698195f84d3b85f1cfb0a09e957f
     ///
     /// ```
