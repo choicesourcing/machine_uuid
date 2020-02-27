@@ -20,7 +20,7 @@ pub mod machineid {
     /// 
     /// // Based on OS, UUID format will differ
     /// // Windows
-    /// assert_eq!("140EF834-2DB3-0F7A-27B4-4CEDFB73167C", uuid);
+    /// // assert_eq!("140EF834-2DB3-0F7A-27B4-4CEDFB73167C", uuid);
     /// 
     /// // Based on OS, UUID format will differ
     /// // Linux
