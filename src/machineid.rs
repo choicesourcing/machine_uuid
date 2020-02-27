@@ -1,11 +1,32 @@
+//! # Machine-UUID
+//!
+//! A library for retrieving UUID.
+
 pub use self::machineid::get;
 pub use self::machineid::get_via_windows_shell;
+pub use self::machineid::get_via_linux_shell;
 pub use self::machineid::transform_windows_output;
 
 pub mod machineid {
 
     use std::process::Command;
 
+    /// Retrieves UUID based on OS.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let uuid = machineid::get();
+    /// 
+    /// // Based on OS, UUID format will differ
+    /// // Windows
+    /// assert_eq!("140EF834-2DB3-0F7A-27B4-4CEDFB73167C", uuid);
+    /// 
+    /// // Based on OS, UUID format will differ
+    /// // Linux
+    /// assert_eq!("92cc698195f84d3b85f1cfb0a09e957f", uuid);
+    /// 
+    /// ```
     pub fn get() -> String
     {
         let mut uuid = String::from("");
@@ -21,6 +42,18 @@ pub mod machineid {
 
     }
 
+    /// Retrieves raw format of UUID retrieval.
+    /// 
+    /// # Examples
+    ///
+    /// ```
+    /// let untransformed = machineid::get_via_windows_shell();
+    /// 
+    /// // c:\ wmic csproduct get UUID
+    /// // UUID
+    /// // 140EF834-2DB3-0F7A-27B4-4CEDFB73167C
+    ///
+    /// ```
     pub fn get_via_windows_shell() -> String {
 
         let output = Command::new("cmd")
@@ -41,6 +74,17 @@ pub mod machineid {
 
     }
 
+    /// Retrieves raw format of UUID retrieval.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let uuid_untrimmed = machineid::get_via_linux_shell();
+    /// 
+    /// // c:\ cat /etc/machine-id
+    /// // 92cc698195f84d3b85f1cfb0a09e957f
+    ///
+    /// ```
     pub fn get_via_linux_shell() -> String {
         let output = Command::new("sh")
             .arg("-c")
@@ -60,6 +104,19 @@ pub mod machineid {
         return result;
     }
 
+    /// Transforms Windows raw format to only contain the UUID.
+    ///
+    /// # Examples
+    ///  
+    /// ```
+    /// // Output
+    /// // UUID  *transforms removes*
+    /// // 140EF834-2DB3-0F7A-27B4-4CEDFB73167C *transform returns*
+    /// 
+    /// let raw = machineid::get_via_windows_shell();
+    /// let just_uuid = machineid::transform_windows_output(raw);
+    ///
+    /// ```
     pub fn transform_windows_output(output: String) -> String {
         let parts: Vec<&str> = output.splitn(2, ' ').collect();
         return String::from(parts[1].trim());
