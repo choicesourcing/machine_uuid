@@ -5,6 +5,7 @@ authors = ["danebalia <dane.balia@sourcing-sa.co.za>"]
 edition = "2018"
 keywords = ["uuid", "machine"]
 readme = "README.md"
+description = "A library to retrieve a machines UUID"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
