@@ -18,6 +18,10 @@ assert_eq!("140EF834-2DB3-0F7A-27B4-4CEDFB73167C", uuid);
 assert_eq!("92cc698195f84d3b85f1cfb0a09e957f", uuid);
 ```
 
+## TODO
+1. (Adhere to API Guidelines)[https://rust-lang.github.io/api-guidelines/checklist.html]
+2. More tests...
+
 ## Add this to your Cargo.toml:
 ```
 [dependencies]
