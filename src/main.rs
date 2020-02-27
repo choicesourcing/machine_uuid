@@ -1,5 +1,5 @@
 pub mod machineid;
 
 fn main() {
-    machineid::get();
+    println!("{:?}", machineid::get());
 }
