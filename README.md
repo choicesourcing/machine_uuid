@@ -36,5 +36,5 @@ assert_eq!("F7FA2B78-F7D4-5B1B-A4E3-BACB1BBD95A1", uuid)
 
 ```toml
 [dependencies]
-machine_uuid = "0.1.0"
+machine_uuid = "0.2.0"
 ```
